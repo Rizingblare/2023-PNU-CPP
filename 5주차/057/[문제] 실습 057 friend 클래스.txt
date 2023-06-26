@@ -1,0 +1,207 @@
+실습 057 friend 클래스
+제출 마감일 2023-04-09 2359
+업로드 가능한 파일 수 3
+제출 방식 개인
+
+
+목적
+
+
+이 실습은 friend class 를 사용하는 연습을 합니다.
+
+
+
+설명
+
+
+강의 자료에서 소개하고 있는 Singly Linked List 의 개념을 사용하여 뮤직 플레이 리스트를 구현해 봅니다.
+
+
+
+구현을 단순화 하기 위해 링크드 리스트의 add 연산은 prepend 로 정의합니다.
+
+
+
+HEAD - node1
+
+HEAD - 새로운 노드 - node1
+
+
+
+링크드 리스트의 remove 연산은 HEAD 에서 시작해서 노드의 끝까지 순회하며 일치하는 노드의 데이터를 삭제합니다.
+
+
+
+HEAD - node1 - 삭제할 노드 - node2
+
+HEAD - node1 - node2
+
+
+
+
+링크드 리스트의 print 연산은 HEAD 에서 시작해서 노드의 끝까지 순회하며 일치하는 노드의 데이터를 출력합니다.
+
+
+
+
+
+문제
+
+
+주어진 프로그램이 동작하는데 필요한 SinglyLinkedList 클래스와 Playlist 클래스를 구현하시오.
+
+
+
+참고
+
+Node 클래스와 Song 클래스를 제공합니다.
+SinglyLinkedList 클래스는 내부적으로 Node 클래스를 이용합니다.
+Playlist 클래스는 내부적으로 SinglyLinkedList 클래스를 이용합니다.
+
+
+
+
+ main.cpp
+
+#include Playlist.h
+
+int main() {
+  Playlist myPlaylist;
+
+  myPlaylist.addSong(Shape of You, Ed Sheeran);
+  myPlaylist.addSong(Uptown Funk, Mark Ronson ft. Bruno Mars);
+  myPlaylist.addSong(Blank Space, Taylor Swift);
+  myPlaylist.addSong(Thinking Out Loud, Ed Sheeran);
+
+  myPlaylist.printPlaylist();
+
+  Song removedSong(Blank Space, Taylor Swift);
+  myPlaylist.removeSong(removedSong);
+  removedSong = {Uptown Funk, Mark Ronson ft. Bruno Mars};
+  myPlaylist.removeSong(removedSong);
+
+  myPlaylist.printPlaylist();
+
+  return 0;
+}
+
+
+
+
+ Node.h
+
+#include Song.h
+
+class Node {
+public
+  Node(Song d)  data(d), next(nullptr) {}
+
+  friend class SinglyLinkedList;
+
+ private
+  Song data;
+  Node next;
+};
+
+ Song.h
+
+#include string
+
+class Song {
+ public
+  stdstring name;
+  stdstring artist;
+
+  Song(stdstring n, stdstring a)  name(n), artist(a) {}
+
+  bool equals(Song other) {
+    return name == other.name &&
+           artist == other.artist;
+  }
+
+  stdstring toString() {
+    return  name +  by  + artist;
+  }
+
+};
+
+ SinglyLinkedList.h
+
+#include Node.h
+
+class SinglyLinkedList {
+ public
+  SinglyLinkedList()  head(nullptr) {}
+  void addNode(Song data);
+  void removeNode(Song data);
+  void printList();
+
+private
+  Node head;
+};
+
+ Playlist.h
+
+
+
+#include SinglyLinkedList.h
+
+class Playlist {
+public
+  Playlist()  songList(new SinglyLinkedList()) {}
+
+  void addSong(stdstring name, stdstring artist);
+  void removeSong(Song song);
+  void printPlaylist();
+
+private
+  SinglyLinkedList songList;
+};
+
+
+
+
+
+입력
+
+
+없음
+
+
+
+
+
+출력
+
+
+Playlist
+
+Thinking Out Loud by Ed Sheeran
+
+Blank Space by Taylor Swift
+
+Uptown Funk by Mark Ronson ft. Bruno Mars
+
+Shape of You by Ed Sheeran
+
+
+
+Playlist
+
+Thinking Out Loud by Ed Sheeran
+
+Shape of You by Ed Sheeran
+
+
+
+
+
+제출파일 
+
+
+SinglyLinkedList.cpp
+
+Playlist.cpp
+
+57.csv
+

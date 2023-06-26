@@ -1,0 +1,155 @@
+실습 112 - fstream
+제출 마감일 2023-06-18 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+목적
+
+이 실습은 파일 입출력에 사용되는 ifstream, ofstream 클래스를 예외 처리와 함께 사용하는 연습을 합니다.
+
+
+
+설명
+
+C++ 에서 제공하는 fstream 헤더 파일을 사용하면 파일을 읽고 쓸 수 있습니다.
+
+ostream 클래스는 파일을 생성하고, 거기에 어떤 내용을 쓸 때 사용합니다.
+
+istream 클래스는 파일의 내용을 읽는데 사용합니다.
+
+
+
+파일을 새로 생성해서 그 파일에 어떤 내용을 기록하려면 ofstream 을 이용해서 다음과 같이 코드를 작성할 수 있습니다.
+
+
+
+#include iostream
+
+#include fstream
+
+using namespace std;
+
+
+
+int main() {
+
+  ofstream fout (filename.txt);
+
+  fout   Files can be tricky, but it is fun enough!  endl;
+
+   fout.close();  자동으로 파일을 닫습니다.
+
+}
+
+
+
+반대로 파일의 내용을 읽기 위해서는 ifstream 클래스를 사용해 다음과 같은 코드를 작성할 수 있습니다.
+
+#include iostream
+
+#include fstream
+
+#include string
+
+using namespace std;
+
+
+
+int main() {
+
+    string content;
+
+    ifstream fin (fstream.cbp);
+
+
+
+    if (fin.is_open()) {
+
+        while (getline (fin, content)) {
+
+            cout  content  endl;
+
+        }
+
+    } else {
+
+        cerr  The file does not exist!  endl;
+
+    }
+
+     fin.close(); 자동으로 파일을 닫습니다.
+
+}
+
+
+
+ifstream 객체의 생성자를 통해 특정 이름으로 파일을 열 때, 해당 파일이 존재하지 않을 수 있습니다.
+
+생성자는 반환값이 없으므로 is_open() 함수를 제공하여 파일이 열려 있는지 여부를 확인할 수 있습니다.
+
+
+
+이번에는 수업에서 배운 C++ 예외 처리를 이용해서 해당 문제를 다뤄보도록 하겠습니다.
+
+스트림은 원래 예외가 발생하지 않습니다 (cout, cin 등도 마찬가지 임) 역사적인 이유로 그렇다고 합니다.
+
+그래서 예외를 발생 시키려면 예외를 사용하겠다는 표시를 스트림에 해 줘야 합니다.
+
+
+
+ifstream fin; 
+
+fin.exceptions(ios_basefailbit  ios_basebadbit);
+
+fin.open(config.ini);
+
+이 문장을 추가하면 해당 파일이 없을 때 예외가 발생합니다.
+
+
+
+문제
+
+다음 예제에서 파일이 없는 경우에 예외 처리를 하시오.
+
+
+
+int main() {
+
+  ifstream, ofstream 은 자동으로 연 파일을 닫는다.
+ ifstream fin;
+ fin.open(config.ini);     default   is   ios_basein
+ ​
+ ofstream fout;
+ fout.open(configconfig.ini);    default   is   ios_baseout
+ fout  This is an example for the exception in C++!  endl;
+ ​
+ return 0;
+}
+
+- iosfailure 타입의 예외만을 처리하시오.
+
+- ifstream, ofstream 각각 예외를 처리하시오
+
+- 예외를 던질 때는 rvalue, 예외를 받을 때는 const reference 로 처리하시오
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+예외 핸들러에서 아래 코드를 사용하시오 (OS별로 예외 설명이 다를 수 있음)
+
+
+cerr  e.what()  endl;
+
+
+
+제출파일
+
+main.cpp
+
+112.csv

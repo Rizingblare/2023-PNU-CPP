@@ -1,0 +1,65 @@
+실습 085 - Complex Excercise (p13)
+제출 마감일 2023-05-21 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+
+목적
+
+
+이 실습은 template 함수를 정의하는 연습을 합니다. 
+
+
+
+
+
+문제
+
+Implement class Complex and template function myFind for  the following code
+
+
+ MyFindTest.cpp
+
+#include iostream
+#include Complex.h
+
+int main() {
+    stdarrayint, 10 arr1 =  { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    auto result1 = myFind(arr1, 100) ;
+    if (result1 != end(arr1) ) stdcout  Found  stdendl;
+
+    stdarraychar, 5 arr2 =  { 'a', 'b', 'c', 'd', 'e' };
+    auto result2 = myFind(arr2, 'e') ;
+    if (result2 != end(arr2) ) stdcout  Found   result2  stdendl;
+
+    stdarrayComplex, 5 arr3 =  {Complex(0, 0), Complex(0, 1),
+                                    Complex(1, 1), Complex(1, 2), Complex(2, 2) } ;
+    auto result3 = myFind(arr3, Complex(2, 2)) ;
+    if (result3 != end(arr3) ) stdcout  Found   result3  stdendl;
+}
+
+ Complex.h
+p. 14 Complex 클래스 코드를 참고하세요.
+Complex 클래스에 필요한 연산자 오버로딩 (예를 들어 ) 를 구현하세요.
+myFind 템플릿 함수는 다음을 참고 하세요.
+template typename T, size_t N
+auto myFind(stdarrayT, N& arr, T target) {
+     implement your code
+}
+
+입력
+
+없음
+
+
+
+출력
+
+Found e
+Found 2 + 2i
+
+
+제출파일
+
+85.csv
+Complex.h

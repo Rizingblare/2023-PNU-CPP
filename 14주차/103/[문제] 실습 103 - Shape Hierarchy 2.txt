@@ -1,0 +1,86 @@
+실습 103 - Shape Hierarchy 2
+제출 마감일 2023-06-09 2359
+업로드 가능한 파일 수 6
+제출 방식 개인
+
+Problem
+
+For this task, you'll continue building on your Shape hierarchy by adding a new Polygon class. The purpose is to ensure that your design complies with the Open-Closed Principle (OCP), meaning you should be able to add this new functionality without altering any existing code.
+
+The Polygon class should inherit from IShape and should accept a variable number of points. Implement the  getArea(), getPerimeter(), and toString() functions specific to a polygon.
+Reflect on your solution and write a brief discussion on whether your code adheres to the Open-Closed Principle (OCP) and why on the description.txt.
+
+
+참고자료
+
+
+
+ ShapeTest.cpp
+
+ 생략
+
+int main() {
+stdvectorstdunique_ptrIShape shapes;
+
+shapes.emplace_back(stdmake_uniqueRectangle(stdvectorPoint{{0, 0}, {0, 2}, {2, 2}, {2, 0}}));
+shapes.emplace_back(stdmake_uniqueTriangle(stdvectorPoint{{0, 0}, {0, 2}, {2, 2}}));
+shapes.emplace_back(stdmake_uniqueCircle(Point{0, 0}, 3));
+shapes.emplace_back(stdmake_uniquePolygon(stdvectorPoint{{0, 0}, {0, 2}, {2, 2}, {2, 0}, {1, 1}}));
+
+doingSomething(shapes);
+
+return 0;
+}
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+Rectangle Area 4.00, Perimeter 8.00
+
+Triangle Area 2.00, Perimeter 6.83
+
+Circle Area 28.27, Perimeter 18.85
+
+Polygon Area 3.00, Perimeter 8.83
+
+totalArea 37.27, totalPerimeter 42.51
+
+Rectangle destructor called
+
+IShape destructor called
+
+Triangle destructor called
+
+IShape destructor called
+
+Circle destructor called
+
+IShape destructor called
+
+Polygon destructor called
+
+IShape destructor called
+
+
+
+
+
+제출파일
+
+
+Circle.h (실습 102)
+Rectangle.h (실습 102)
+Triangle.h (실습 102)
+
+Polygon.h
+description.txt
+103.csv
+
+(IShape.h, Helper.h, ShapeTest.cpp 파일은 PLATO 서버에 등록되어 있습니다)

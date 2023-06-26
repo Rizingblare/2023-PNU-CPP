@@ -1,0 +1,59 @@
+실습 121 온라인 영화 예매 애플리케이션 구현
+
+
+문제 
+
+
+제공되는 예제 코드와 OO Thinking4 의 43p 의 내용을 참고하여 다음 지시를 만족하는 프로그램을 구현 후 제출하세요.
+
+
+
+참고 CMakeLists.txt 파일에 아래 정보를 추가해 보세요.
+
+
+
+set(CMAKE_CXX_STANDARD 17)
+add_executable([프로젝트명] Screening.h Screening.cpp Movie.h Movie.cpp Money.h Reservation.h Reservation.cpp Customer.h DiscountPolicy.h DiscountPolicy.cpp AmountDiscountPolicy.h AmountDiscountPolicy.cpp DiscountCondition.h PeriodCondition.h PeriodCondition.cpp MovieTest.cpp )
+
+
+2-1. DiscountPolicy 를 상속 받아 비율 할인 기능을 추가하기 위해 비율할인정책 클래스를 구현하시오.
+그런 후 main() 함수에서 비율할인정책(PercentDiscountPolicy)을 이용한 요금 계산이 일어나도록 구현하시오.
+단, 할인조건은 주어진 PeriodCondition 조건을 사용하시오.
+
+구현파일 PercentDiscountPolicy.h, PercentDiscountPolicy.cpp
+
+
+
+2-2. DiscountCondition 을 상속 받아 기간 할인 조건을 추가하기 위해 순번조건할인 클래스를 구현하시오 .
+그런 후 main() 함수에서 순번조건할인 (SequenceCondition, 첫번 째 영화상영)을 이용한 요금 계산이 일어나도록 구현하시오.
+단, 할인정책은 PercentDiscountPolicy 를 사용하시오.
+
+구현파일 SequenceCondition.h, SequenceCondition.cpp
+
+
+
+2.3 상속과 다형성을 이용하여 애플리케이션의 기능을 확장할 수 있었다. 변경이 용이한가 관점에서 자신의 생각을 A4 한장 이내로 기술하시오.
+
+작성파일 123_학번.pdf
+
+
+
+
+
+제출파일
+
+
+CLion 프로젝트 파일, 123_학번.pdf 및 activity tracker log 파일 (121.csv) 을 압축하여 제출합니다.
+
+CLion  Run 클릭 시 실행되지 않으면 채점을 할 수 없습니다.
+
+121_학번.zip
+
+
+
+
+
+
+
+ 
+exam3.zip

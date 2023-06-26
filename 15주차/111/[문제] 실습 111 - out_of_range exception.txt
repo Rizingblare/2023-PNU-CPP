@@ -1,0 +1,112 @@
+실습 111 - out_of_range exception
+제출 마감일 2023-06-18 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+
+목적
+
+이 실습은 trycatchthrow 문법을 사용하는 연습을 합니다. 
+
+
+
+설명
+
+
+
+배열은 n개의 연속된 메모리 공간을 표현합니다.
+
+배열에 접근은 0 부터 n-1 까지 인덱스로 접근합니다. ( [ ] operator in C++)
+
+
+
+실제 배열을 이용해서 프로그램을 작성하다 보면,
+
+배열 접근 인덱스가 어떠한() 이유로 마이너스 값이나 n 인 경우가 종종 발생합니다.
+
+예를 들어, Java 언어에서 가장 많이 발생하는 상위 예외 중 하나가 ArrayIndexOutOfBounds 예외 입니다.
+
+
+
+이럴 경우 개발자는 배열을 안전하게 접근하게 하기 위한 장치를 고민해 볼 수 있습니다.
+
+
+
+인덱스 접근에 안전한 Array 타입을 class 문법을 이용해 정의해 봅시다.
+
+Array.h
+
+#ifndef WEEK12_ARRAY_H
+#define WEEK12_ARRAY_H
+
+#include cstddef
+#include exception
+#include string
+
+templatetypename T
+class Array {
+public
+    Array(size_t size)  size(size), data(new T[size]) {}
+    T& at(size_t index){
+        if (0= index && index  size)
+            return data[index];
+         throw stdout_of_range(stdto_string(index));
+    }
+    ~Array() {delete[] data;}
+private
+    T data;
+    size_t size;
+};
+#endif WEEK12_ARRAY_H
+ 
+
+
+문제
+
+Array 타입을 사용하는 main() 함수에서 예외가 발생 시 예외 처리하는 프로그램을 작성하시오. 
+
+단, catch 문에서는 다음 출력문을 사용하시오.
+
+stdcerr  Out of Range error   e.what()  'n';
+
+참고
+
+RangeExceptionTest.cpp
+
+ main() 함수에 예외 처리 코드를 추가하시오.
+
+#include iostream
+#include Array.h
+
+int main() {
+    Arrayint arr(5);
+    arr.at(0) = 1;
+    arr.at(1) = 2;
+    arr.at(2) = 3;
+    arr.at(3) = 4;
+    arr.at(4) = 5;
+    arr.at(5) = 6;
+    return 0;
+}
+
+
+
+입력
+
+없음
+
+
+
+
+
+출력
+
+Out of Range error 5
+
+
+
+제출파일
+
+RangeExceptionTest.cpp
+
+111.csv

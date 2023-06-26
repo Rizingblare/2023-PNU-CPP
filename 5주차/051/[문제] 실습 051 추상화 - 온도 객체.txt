@@ -1,0 +1,189 @@
+실습 051 Abstraction - Temperature
+제출 마감일: 2023-04-06 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+목적
+
+
+이 실습은 온도 객체를 만드는 연습을 합니다.
+
+
+
+설명
+
+
+온도를 나타내는 온도 객체가 있습니다. 
+
+
+
+25도 온도를 나타내는 객체
+
+30도 온도를 나타내는 객체
+
+
+
+우리나라는 섭씨(Celsius)를 사용하지만, 미국은 화씨(Fahrenheit)를 사용합니다.
+
+
+
+화씨 77도 온도를 나타내는 객체
+
+화씨 50도 온도를 나타내는 객체
+
+
+
+온도 객체는 서로 더 할 수 있어야 합니다.
+
+
+
+25C + 25C = 50C
+
+77F + 77F = 154F
+
+
+
+조금 생각해 보니 25C + 77F = 50C 도 가능해야 할 것 같습니다.
+
+
+
+
+
+문제
+
+
+온도 객체를 생성하는 Temperature 클래스를 정의하시오.
+
+단, 클래스 선언은 Temperature.h 파일에, 구현은 Temperature.cpp 파일에 하시오.
+
+
+
+<참고>
+
+
+//TemperatureTest.cpp
+
+SCALE getScale(char scale) {
+    return scale == 'C' ? CELSIUS : FAHRENHEIT;
+}
+
+Temperature createTemperatureFromKeyboard(){
+    float degree;
+    char scale;
+    std::cin >> degree >> scale;
+    return Temperature {degree, getScale(scale)};
+}
+
+int main() {
+    Temperature t1 = createTemperatureFromKeyboard();
+    std::cout << t1.print();
+
+    Temperature t2 = createTemperatureFromKeyboard();
+    std::cout << t2.print();
+
+    Temperature t3 = t1.add(t2);
+    std::cout << t3.print();
+
+    Temperature t4 = t2.add(t1);
+    std::cout << t4.print();
+
+    Temperature t5 = t3.add(t4);
+    std::cout << t5.print();
+
+    return 0;
+}
+
+
+
+//Temperature.h
+
+
+enum SCALE {
+    CELSIUS,
+    FAHRENHEIT
+};
+
+class Temperature {
+public:
+    Temperature(double temp, SCALE scale=CELSIUS);
+    Temperature add(Temperature other);
+    std::string print() const;
+private:
+    // Conversion Function
+    void convertToCelsius();
+    void convertToFahrenheit();
+private:
+    double temperature;
+    SCALE scale;
+};
+
+
+//Temperature.cpp
+
+
+// implement your code
+
+std::string Temperature::print() {
+    std::stringstream ss;
+    ss << std::fixed;
+    ss << std::setprecision(1);
+    if (this->scale == FAHRENHEIT) {
+        ss << this->temperature << "F\n";
+    } else {
+        ss << this->temperature << "C\n";
+    }
+    return ss.str();
+}
+
+
+제출파일 
+
+
+Temperature.cpp
+
+51.csv
+
+
+
+
+
+입출력 예
+
+
+입력	출력
+25 C
+77 F
+
+25.0 C
+77.0 F
+50.0 C
+154.0 F
+117.8 C
+
+50 F
+20 C
+
+50.0 F
+20.0 C
+118.0 F
+30.0 C
+204.0 F
+
+77 F
+50 F
+
+77.0 F
+50.0 F
+127.0 F
+127.0 F
+254.0 F
+
+25 C
+20 C
+
+25.0 C
+20.0 C
+45.0 C
+45.0 C
+90.0 C

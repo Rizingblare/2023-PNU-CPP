@@ -1,0 +1,135 @@
+실습 055 static member variable
+제출 마감일: 2023-04-09 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+목적
+
+
+이 실습은 클래스의 static 멤버 변수와 함수를 사용하는 연습을 합니다.
+
+
+
+설명
+
+
+우리는 프로그램을 작성할 때 프로그램의 정상적인 동작을 확인하기 위해 
+
+코드에 std::cout 을 이용해서 변수 값이나 객체의 멤버 변수 값 등을 출력합니다. 
+
+
+
+이런 활동을 개발자들은 "로그를 남긴다" 라고 표현하며,
+
+std::cout 이 아니라 glog 등의 외부 라이브러리를 사용하여 로그를 남깁니다.
+
+
+
+class 문법과 static 키워드를 이용해서 우리만의 로그 클래스를 구현해 봅시다.
+
+
+
+문제
+
+
+주어진 main 함수가 동작하도록 Logger 클래스를 정의하시오.
+
+단, 로그 레벨은 DEBUG 부터 ERROR 순위이며, 설졍된 로그 레벨 이상의 로그 메시지만 출력합니다.
+
+
+
+<참고>
+
+Logger 클래스에 static int logLevel 멤버 변수를 선언합니다.
+static 멤버 변수는 class 문법 밖에서 별도의 선언을 해 줘야 합니다. (C++ 의 경우)
+
+
+//Logger.h
+
+
+enum LogLevel {
+    DEBUG = 0,
+    INFO = 1,
+    WARNING = 2,
+    ERROR = 3
+};
+
+
+class Logger {
+    // implement your code
+    private:
+        static int logLevel;
+};
+
+
+
+//Logger.cpp
+
+// implement your code
+
+// static 멤버 변수를 "정의" 하고 초기값을 1로 설정합니다.
+
+// 멤버 함수들 구현
+
+
+
+// main.cpp
+
+
+#include "Logger.h"
+
+const std::string TAG = "main";
+
+int main() {
+    int level;
+    std::cin >> level;
+    switch(level) {
+        case 0: Logger::setLogLevel(DEBUG); break;
+        case 1: Logger::setLogLevel(INFO); break;
+        case 2: Logger::setLogLevel(WARNING); break;
+        case 3: Logger::setLogLevel(ERROR); break;
+        default: Logger::setLogLevel(DEBUG); break;
+    }
+
+    Logger::setLogLevel(level);
+    Logger::debug("This is a debug message", TAG);
+    Logger::info("This is an info message", TAG);
+    Logger::warning("This is a warning message", TAG);
+    Logger::error("This is an error message", TAG);
+
+    return 0;
+}
+
+
+제출파일 
+
+
+Logger.h
+
+Logger.cpp
+
+55.csv
+
+
+
+
+
+
+
+입출력 예 
+
+
+입력	출력
+0	
+[DEBUG][main] This is a debug message
+[INFO][main] This is an info message
+[WARNING][main] This is a warning message
+[ERROR][main] This is an error message
+1	
+[INFO][main] This is an info message
+[WARNING][main] This is a warning message
+[ERROR][main] This is an error message
+2	
+[WARNING][main] This is a warning message
+[ERROR][main] This is an error message

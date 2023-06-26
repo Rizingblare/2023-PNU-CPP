@@ -1,0 +1,157 @@
+실습 053 멤버 초기화 목록
+제출 마감일: 2023-04-06 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+목적
+
+
+
+이 실습은 멤버 초기화 목록을 사용하여 클래스의 멤버 변수를 초기화 하는 연습을 합니다.
+
+
+
+설명
+
+
+
+객체를 생성하기 위해서는 클래스와 생성자를 정의해야 합니다.
+
+
+
+2차원 좌표 평면 위에 점(point) 을 나타내는 객체가 있습니다. 
+
+점 객체를 생성하기 위한 클래스 정의를 다음과 같이 했습니다.
+
+
+
+
+class Point {
+public:
+    Point(double x=0, double y=0) : x(x), y(y) {}
+    double norm() const {return sqrt(x*x + y*y);};
+    double getX() const {return x;}
+    double getY() const {return y;}
+private:
+    const double x, y;
+};
+
+
+사각형은 두 개의 점으로 표현할 수 있습니다.
+
+
+
+사각형 객체를 생성하는 Rectangle 클래스를 정의해 보겠습니다.
+
+
+
+class Rectangle {
+public:
+    implements the constructor
+    // Rectangle(double x1, double y1, double x2, double y2) 
+    double area() {
+        double width = abs(rightBottom.getX() - leftTop.getX());
+        double height = abs(rightBottom.getY() - leftTop.getY());
+        return width * height;
+    };
+private:
+    Point leftTop, rightBottom;
+};
+
+내부 구현으로 Point 객체를 사용하고 있습니다.
+
+
+
+클래스의 멤버 변수로 다른 클래스가 사용되는 경우에 (예제에서는 Point 클래스) 
+
+객체를 생성할 때, 멤버 변수의 객체도 생성해 줘야 합니다.
+
+
+
+이럴 때, C++11 부터 member initializer list 를 사용할 수 있습니다.
+
+
+
+참고로, 멤버 초기화 리스트로 생성자에 초기화를 해 줘야 하는 경우는 다음과 같다.
+
+
+
+const 멤버 변수, 레퍼런스 멤버 변수, 디폴트 생성자가 없는 멤버 변수, 디폴트 생성자가 없는 베이스 클래스(상속에서 설명)
+
+
+
+
+
+문제
+
+
+
+두 점을 입력 받아 사각형의 너비를 구하는 프로그램을 작성하시오.
+
+단, Point, Rectangle 객체를 생성하는 클래스를 정의하여 구현하시오. (설명 참조)
+
+
+
+<참고>
+
+
+
+
+
+int main() {
+    double x1, y1, x2, y2;
+    std::cin >> x1 >> y1 >> x2 >> y2;
+    Rectangle rectangle {x1, y1, x2, y2};
+    std::cout << rectangle.area() << std::endl;
+}
+
+
+
+입력
+
+
+
+점 두 개의 위치가 공백으로 구분되어 주어짐 (x1, y1, x2, y2)
+
+예)
+
+0 2 2 0
+
+
+
+출력
+
+
+
+사각형의 너비
+
+4
+
+
+
+
+
+제출파일 
+
+
+
+Point.h
+
+Rectangle.h
+
+53.csv
+
+
+
+
+
+입출력
+
+
+
+
+입력	출력
+0 2 2 0	4
+3 1 5 3	4
+10 20 30 40	400

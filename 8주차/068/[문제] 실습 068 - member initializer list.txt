@@ -1,0 +1,112 @@
+실습 068 - member initializer list
+제출 마감일: 2023-04-27 23:59
+업로드 가능한 파일 수: 4
+제출 방식: 개인
+
+
+목적
+
+
+이 실습은  class 의 생성자를 정의하는 연습을 합니다. 
+
+
+
+설명
+
+
+객체를 생성하기 위해서는 클래스의 생성자가 필요합니다.
+
+자신이 정의한 클래스가 코드의 여러 곳에서 사용되려면 다양한 생성자를 정의할 필요가 있습니다.
+
+
+문제
+
+주어진 프로그램이 정상적으로 동작하도록 필요한 클래스를 정의하시오.
+
+
+<참고>
+
+클래스의 멤버 변수는 모두 private 으로 선언합니다.
+Department 클래스 타입과 Faculty 타입의 멤버 변수는 pointer  타입으로 선언합니다. 다음의 예를 참고하세요.
+
+private:
+    std::string name;
+    Faculty* faculty;
+
+private:
+    std::string name;
+    int numDepartments;
+    Department* departments;
+
+
+
+//FacultyTest.cpp
+
+#include <memory>
+#include "University.h"
+#include "Department.h"
+#include "Faculty.h"
+
+int main() {
+    auto faculty = std::make_shared<Faculty>("Computer Science", 10);
+
+    Department cse("Computer Science and Engineering", faculty.get());
+    Department ibe("Information and Biomedical Engineering");
+    ibe.setFaculty(faculty.get());
+    
+    Department depts[3] = {Department("Math"), ibe, cse };
+    University univ("Pusan National University", 3);
+    univ.setDepartments(depts);
+    
+    univ.printInfo();
+
+    return 0;
+}
+
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+University Name: Pusan National University
+
+Number of Departments: 3
+
+
+
+Department Name: Math
+
+Faculty Name: N/A
+
+Number of Faculty Members: N/A
+
+
+
+Department Name: Information and Biomedical Engineering
+
+Faculty Name: Computer Science
+
+Number of Faculty Members: 10
+
+
+
+Department Name: Computer Science and Engineering
+
+Faculty Name: N/A
+
+Number of Faculty Members: N/A
+
+
+
+제출파일
+
+University.h
+Department.h
+Faculty.h
+68.csv

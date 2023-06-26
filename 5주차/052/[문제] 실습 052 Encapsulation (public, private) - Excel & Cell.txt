@@ -1,0 +1,144 @@
+실습 052 Encapsulation (public, private) - Excel & Cell
+제출 마감일: 2023-04-06 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+목적
+
+
+
+이 실습은 객체의 내부 구현을 숨기는 연습을 합니다.
+
+
+
+
+
+설명
+
+
+부산대 메일 계정만 있으면 MS Office 365 를 사용할 수 있습니다.
+
+
+
+엑셀을 이용해 성적을 계산한다고 가정하겠습니다.
+
+
+
+이름	C++	Java
+1	김길동	87	92.5
+2	홍길동	95	82.4
+
+ 엑셀에서는 이름, C++ , 87 과 같은 데이터를 셀(Cell) 이라고 부릅니다.
+
+
+
+우리는 엑셀 및 셀 객체를 생성해야 합니다.
+
+
+
+셀 객체는 문자열 값이나 숫자 값을 저장할 수 있어야 하고, 엑셀 객체는 셀 데이터를 이용해 유용한 기능을 제공해야 합니다.
+
+
+
+
+
+문제
+
+
+아래 main() 함수가 실행되도록 Cell 과 Excel 클래스를 정의하시오.
+
+
+
+// main.cpp
+
+int main(){
+    std::vector<std::vector<Cell>> data = {
+            {Cell("name"), Cell("C++"), Cell("Java")},
+            {Cell("Kim"), Cell(87), Cell(75.7)},
+            {Cell("Lee"), Cell(90), Cell(80.6)},
+            {Cell("Park"), Cell(70), Cell(90.0)}
+    };
+    Excel excel(data);
+
+    std::cout << std::fixed;
+    std::cout << std::setprecision(1);
+    double score = excel.average(1, 1, 3, 1);
+    std::cout << "C++ Avg. Score: " << score << std::endl;
+    score = excel.average(1, 2, 3, 2);
+    std::cout << "Java Avg. Score: " << score << std::endl;
+}
+
+
+//Excel.h
+
+
+
+class Excel {
+public:
+    Excel(std::vector<std::vector<Cell>> data);
+    double average(int fromRow, int fromCol, int toRow, int toCol) const;
+private:
+    std::vector<std::vector<Cell>> data;
+};
+
+
+
+// Cell.h
+
+
+
+enum CELL_TYPE {
+    STRING,
+    INT,
+    DOUBLE
+};
+
+class Cell {
+public:
+    Cell();
+    Cell(std::string val);
+    Cell(int val);
+    Cell(double val);
+
+    CELL_TYPE getType() const;
+    std::string getStringVal() const;
+    int getIntVal() const;
+    double getDoubleVal() const;
+private:
+    CELL_TYPE type;
+    std::string stringVal;
+    int intVal;
+    double doubleVal;
+};
+
+
+
+입력
+
+
+없음
+
+
+
+
+
+출력
+
+
+C++ Avg. Score: 82.3
+
+Java Avg. Score: 82.1
+
+
+
+
+
+제출파일 
+
+
+Cell.cpp
+
+Excel.cpp
+
+52.csv

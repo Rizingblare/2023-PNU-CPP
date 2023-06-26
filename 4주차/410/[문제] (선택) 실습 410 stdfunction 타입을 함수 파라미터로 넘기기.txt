@@ -1,0 +1,179 @@
+(선택) 실습 410 stdfunction 타입을 함수 파라미터로 넘기기
+제출 마감일 2023-05-07 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+
+목적
+
+
+
+이 실습은 stdfunction 타입을 함수의 파라미터로 전달하는 연습합니다.
+
+
+
+설명
+
+
+
+객체 지향 언어를 이용해 개발된 프레임워크를 사용해 보면 함수를 파라미터로 전달하는 경우를 종종 보게 됩니다.
+
+
+
+예를 들어, 특정 이벤트가 발생하면 호출해 달라는 이벤트 핸들러들, 실행이 종료된 후 결과를 받기 위한 callback 함수들, 제공되는 함수에 따라서 실행 시 제공되는 함수에 따라서 동작을 변경하고자 하는 경우 등 입니다.
+
+
+
+
+LOL 챔피언들을 조건에 따라 조회하는 프로그램을 작성한다고 가정하겠습니다.
+
+
+struct Champion {
+    stdstring name;
+    int health;
+    int attack;
+};
+
+
+먼저 체력이 700 보다 큰 챔피언을 찾아 보겠습니다.
+
+
+auto findChampionMoreThanHealth(stdvectorChampion champions, int health) {
+    stdvectorChampion result;
+    for (auto& c  champions)
+        if(c.health  health)
+            result.push_back(c);
+    return result;
+}
+auto result1 = findChampionMoreThanHealth(champions, 700);
+
+
+이번엔 공격력이 70 보다 큰 챔피언을 찾아 보겠습니다.
+
+
+auto findChampionMoreThanAttack(stdvectorChampion champions, int attack) {
+    stdvectorChampion result;
+    for (auto& c  champions)
+        if(c.attack  attack)
+            result.push_back(c);
+    return result;
+}
+
+auto result2 = findChampionMoreThanAttack(champions, 70);
+
+
+이런 방법으로 함수를 정의하면 조건별로 매우 많은 함수를 구현해야 합니다.
+
+
+
+비교하는 행위를 파라미터로 넘기는 방법으로 사용해서 함수를 구현해 보겠습니다.
+
+
+auto findChampionWithCondition(stdvectorChampion champions, stdfunctionbool(Champion) condition) {
+    stdvectorChampion result;
+    for (auto& c  champions)
+        if(condition(c))
+            result.push_back(c);
+    return result;
+}
+
+
+stdfunctionbool(Champion) condition1 = [ ] (Champion c) { return c.health  700; } ;
+stdfunctionbool(Champion) condition2 = [ ] (Champion c) { return c.attack  70; } ;
+auto result3 = findChampionWithCondition (champions, condition1);
+auto result4 = findChampionWithCondition (champions, condition2);
+
+
+문제
+
+
+
+챔피언의 리스트가 벡터로 주어진다. 조건에 맞는 챔피언을 출력하는 프로그램을 작성하시오.
+
+단, 챔피언 리스트는 아래 코드를 참고하고, 조건은 stdfunction 타입으로 정의하시오.
+
+
+
+참고
+
+Champion.h 
+#include iostream
+#include string
+#include vector
+#include functional
+struct Champion {
+    stdstring name;
+    int health;
+    int attack;
+};
+auto findChampionMoreThanHealth(stdvectorChampion champions, int health) {
+}
+auto findChampionMoreThanAttack(stdvectorChampion champions, int attack) {
+}
+auto findChampionWithCondition(stdvectorChampion champions, stdfunctionbool(Champion) condition) {
+}
+void printChampion(const stdvectorChampion champions){
+}
+stdvectorChampion createChampion() {
+    stdvectorChampion champions;
+    Champion tryndamere {Tryndamere, 625, 72};
+    Champion kled {Kled, 740, 35};
+    Champion garen {Garen, 620, 66};
+    champions.push_back(tryndamere);
+    champions.push_back(kled);
+    return champions;
+}
+
+
+입력
+
+
+
+health[체력] - 조건의 체력보다 더 큰 체력을 가진 챔피언을 출력함
+
+attack[공격력] - 조건의 공격력보다 더 큰 공격력을 가진 챔피언을 출력함
+
+예) health70
+
+
+
+출력
+
+
+
+챔피언의 정보 (이름, 체력, 공격력) 을 출력한다.
+
+예) Tryndamere 625 72
+
+
+
+제출파일
+
+
+
+function_parameter.cpp
+
+410.csv
+
+
+
+그 외 파일은 서버에 등록되어 있습니다.
+
+
+
+
+
+
+
+
+
+입출력
+
+
+
+입력	출력
+health700	Kled 740 35
+attack70	Tryndamere 625 72
+health600	Tryndamere 625 72
+Kled 740 35
+Garen 620 66

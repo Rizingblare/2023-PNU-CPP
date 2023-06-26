@@ -1,0 +1,114 @@
+실습 047 함수 오버로딩
+제출 마감일 2023-05-07 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+목적
+
+
+
+이 실습은 함수 오버로딩을 연습합니다.
+
+
+
+설명
+
+
+
+C++ 에서는 이름은 동일한데 파라미터가 다른 함수를 정의할 수 있습니다.
+
+
+
+게임의 인벤토리에 아이템을 추가하는 기능을 구현해 봅니다.
+
+
+
+stdmapstdstring, int inventory;    stdmap 을 선언합니다.
+
+
+
+아이템을 획득해서 인벤토리에 추가하는 함수를 작성합니다.
+
+
+
+void addItem(stdmapstdstring, int& inventory, stdstring item, int count) { 
+
+    inventory[item] += count; 
+
+}
+
+
+
+아이템과 돈을 획득해서 인벤토리에 추가하는 함수를 작성합니다.
+
+
+
+void addItem(stdmapstdstring, int& inventory, stdstring item, float money) { 
+
+     your code here 
+
+}
+
+
+
+
+
+문제
+
+
+
+다음 메인 함수가 정상적으로 실행될 수 있도록 addItem() 함수를 구현하시오.
+
+
+int main(){
+    stdmapstdstring, int inventory;
+    addItem(inventory, sword, 1);
+    addItem(inventory, shield, 2);
+    addItem(inventory, shield, 5.0F);
+    addItem(inventory, armor, 3.0F);
+​
+    for (const auto &[key, value]  inventory)
+        stdcout  key     value  stdendl;
+}
+
+
+입력
+
+
+
+없음
+
+
+
+출력
+
+
+
+MONEY 8 
+
+armor 1 
+
+shield 3 
+
+sword 1
+
+
+
+
+
+제출파일
+
+
+
+function_overloading.cpp
+
+47.csv
+
+
+
+입출력
+
+
+
+입력	출력
+MONEY 8 armor 1 shield 3 sword 1

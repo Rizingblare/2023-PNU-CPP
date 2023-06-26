@@ -1,0 +1,227 @@
+실습 094 - 프로그램 실행 중 동작 변화 시키기
+제출 마감일 2023-06-01 2359
+업로드 가능한 파일 수 3
+제출 방식 개인
+
+
+목적
+
+
+이 실습은 클래스의 다형성을 사용하는 연습을 합니다. 
+
+
+
+
+
+설명
+
+
+프로그램의 특정 동작이 실행 중에 변경되는 경우는 많습니다.
+
+예를 들어, LOL 에서 챔피언을 선택하면, QWER 키로 사용하는 챔피언의 스킬이 변경됩니다.
+
+다음과 같은 코드를 생각할 수 있지만, 우리가 가야 할 길은 아닌 것 같습니다.
+
+
+
+void q() {
+
+    if(갱플랭크) 불의 심판
+
+    else if (이즈리얼) 끓어오르는 주문의 힘
+
+    ...
+
+}
+
+
+
+다형성을 이용한 해법에 대해 고민해 봅시다.
+
+
+
+
+
+문제
+
+
+사용자가 선택한 챔피언에 맞게 QWER 스킬을 수행하도록 주어진 프로그램에 필요한 클래스를 작성하시오.
+
+
+
+참고
+
+
+main.cpp
+
+#include algorithm
+#include map
+#include Champion.h
+
+using namespace std;
+
+CHAMPION getChampion(){
+    stdmapstdstring, CHAMPION cmds = {
+            {gangplank, CHAMPIONGANGPLANK},
+            {ezreal, CHAMPIONEZREAL}
+    };
+    while(true) {
+        stdstring champion;
+        stdcin  champion;
+        transform(begin(champion), end(champion), begin(champion),
+                  [](auto &c) { return tolower(c); });
+        auto found = cmds.find(champion);
+        if (found != end(cmds))
+            return found-second;
+    }
+}
+
+enum class COMMAND {SELECT, QUIT};
+COMMAND getCommand() {
+    stdstring cmd;
+    stdcin  cmd;
+    if (cmd == select)
+        return COMMANDSELECT;
+    else if (cmd == quit)
+        return COMMANDQUIT;
+}
+int main() {
+    한글 처리
+#if defined __linux__
+    setlocale(LC_ALL, );
+#elif defined(WIN32)
+    stdwcout.imbue(stdlocale(kor));
+   stdwcin.imbue(stdlocale(kor));
+#endif
+    COMMAND cmd;
+    while((cmd=getCommand())!=COMMANDQUIT) {
+        switch (cmd){
+            case COMMANDSELECT {
+                Champion c;
+                c.select_champion(getChampion());
+                c.q(); c.w(); c.e(); c.r();
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+Skill.h
+
+class Skill {
+public
+    virtual void q() { };
+    virtual void w() { };
+    virtual void e() { };
+    virtual void r() { };
+    virtual ~Skill() { };
+};
+
+ Champion.h
+
+enum class CHAMPION {GANGPLANK, EZREAL};
+class Champion {
+public
+    void select_champion(CHAMPION champion){
+        switch(champion){
+            case CHAMPIONGANGPLANK
+                skill = stdmake_uniqueGangplankSkill();
+                break;
+            case CHAMPIONEZREAL
+                skill = stdmake_uniqueEzrealSkill();
+        }
+    }
+    void q() { skill-q(); }
+    void w() { skill-w(); }
+    void e() { skill-e(); }
+    void r() { skill-r(); }
+private
+    stdunique_ptrSkill skill;
+};
+
+ GangplankSkill.h
+
+ 구현하시오.
+
+
+
+ EzrealSkill.h
+
+ 구현하시오.
+
+
+
+
+
+입력
+
+
+프로그램 제어 명령어
+
+select  챔피온을 선택한다. 챔피온 선택 시 챔피온 이름을 입력한다.  gangplank, ezreal
+quit  프로그램을 종료한다.
+
+
+
+
+출력
+
+
+선택된 챔피언의 QWER 주문을 수행한다.
+
+gangplank
+
+q TRIAL BY FIRE (불의 심판)
+w PARRRLEY (혀어어어업상)
+e REMOVE SCURVY (괴혈병 치료)
+r POWDER KEG (화약통)
+
+
+ezreal
+
+q RISING SPELL FORCE (끓어오르는 주문의 힘)
+w MYSTIC SHOT (신비한 화살)
+e ESSENCE FLUX (정수의 흐름)
+r ARCANE SHIFT (비전 이동)
+
+
+
+입출력 예제
+
+
+입력	출력
+select
+ezreal
+select
+gangplank
+quit	RISING SPELL FORCE (끓어오르는 주문의 힘)
+MYSTIC SHOT (신비한 화살)
+ESSENCE FLUX (정수의 흐름)
+ARCANE SHIFT (비전 이동)
+TRIAL BY FIRE (불의 심판)
+PARRRLEY (혀어어어업상)
+REMOVE SCURVY (괴혈병 치료)
+POWDER KEG (화약통)
+select
+ezreal
+quit
+ RISING SPELL FORCE (끓어오르는 주문의 힘)
+MYSTIC SHOT (신비한 화살)
+ESSENCE FLUX (정수의 흐름)
+ARCANE SHIFT (비전 이동)
+select
+gangplank
+quit
+TRIAL BY FIRE (불의 심판)
+PARRRLEY (혀어어어업상)
+REMOVE SCURVY (괴혈병 치료)
+POWDER KEG (화약통)
+
+
+
+제출파일
+
+
+EzrealSkill.h
+GangplankSkill.h

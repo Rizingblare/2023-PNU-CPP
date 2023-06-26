@@ -1,0 +1,131 @@
+실습 082 - 템플릿 클래스
+제출 마감일 2023-05-14 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+
+목적
+
+이 실습은  template class 를 정의하는 연습을 합니다. 
+
+
+
+설명
+
+지금까지 실습 및 과제를 진행하면서 STL 라이브러리에서 제공하는 stdvector 클래스의 사용 빈도가 높았습니다.
+
+벡터 클래스를 사용할 때는 항상 벡터에 저장할 타입을 함께 제공해 줬습니다. 
+예를 들어, stdvectorint, stdvectorStudent, stdvectorstdstring 등 입니다.
+
+맞습니다. stdvector 는 템플릿 클래스입니다. 아마도 다음과 비슷하게 정의되어 있을 것입니다.
+templatetypename T
+class vector {
+public
+          vector(int n);
+          T& operator[ ] (int index); 
+        ...
+private
+          int _size;
+          T _data;
+}
+
+벡터 타입의 변수 stdvectorint vec; 를 선언하면, 벡터 템플릿 클래스는 다음과 같이 인스탄스화 됩니다.
+template
+class vector {
+public
+          vector(int n);
+          int& operator[ ] (int index); 
+        ...
+private
+          int _size;
+          int _data;
+}
+
+stdvectorStudent vec2; 변수를 정의하면, 다음과 같이 인스턴스화 됩니다.
+templatetypename T
+class vector {
+public
+          vector(int n);
+          Student& operator[ ] (int index); 
+        ...
+private
+          int _size;
+          Student _data;
+}
+
+
+
+문제
+
+my_vector 템플릿 클래스를 정의하시오.
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+주어진 main.cpp 파일의 표준 출력은 다음과 같다.
+
+
+1 2 3 4 10 
+
+
+
+제출파일
+
+my_vector.h
+82.csv
+
+
+
+참고
+
+main.cpp -----------------------------
+
+#include my_vector.h
+#include iostream
+
+int main() {
+    using namespace std;
+    my_vectorint vec = {1, 2, 3, 4, 5};
+    my_vectorint vec2(vec); vec2[4] = 10;
+    for (int i=0; ivec2.size(); ++i)
+        cout  vec2[i]  ' ' ;
+    cout  'n';
+
+}
+
+
+
+my_vector.h -----------------------------
+#ifndef TEMPLATE_MY_VECTOR_H
+#define TEMPLATE_MY_VECTOR_H
+
+#include algorithm
+#include initializer_list
+#include memory
+
+templatetypename T
+class my_vector {
+public
+    explicit my_vector(size_t N=0) noexcept ;   생성자를 구현하시오
+
+    my_vector(stdinitializer_listint lst) noexcept ;   생성자를 구현하시오
+
+    my_vector(const my_vectorT& other) noexcept ;  복사 생성자를 구현하시오 (deep copy)
+
+    T& operator[](int i) ;  subscript operator, 오퍼레이터 오버로딩 하시오
+
+    size_t size() const  멤버 함수를 구현하시오
+
+private
+    size_t _size;
+    stdunique_ptrT[] _data;
+};
+
+#endif TEMPLATE_MY_VECTOR_H

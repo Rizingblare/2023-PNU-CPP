@@ -1,0 +1,158 @@
+실습 210 - enum class
+제출 마감일: 2023-04-30 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+
+목적
+
+
+이 실습은 enum class 타입을 사용하는 연습을 합니다. 
+
+
+
+
+
+설명
+
+
+열거형 (enumration) 은 명시적으로 명명된 상수들을 포함하는 값 범위로 값이 제한된 타입입니다.
+
+열거형에는 unscoped enumeration과 scoped enumeration 이 있습니다.
+
+
+
+scoped enumeration의 예는 다음과 같습니다.
+
+
+
+enum class COLOR { RED, GREEN = 20, BLUE };
+
+COLOR r = COLOR::BLUE;
+
+ 
+
+switch(r) {
+
+    case COLOR::RED  : 
+
+        std::cout << "red\n";   break;
+
+    case COLOR::GREEN: 
+
+        std::cout << "green\n"; break;
+
+    case COLOR::BLUE : 
+
+        std::cout << "blue\n";  break;
+
+}
+
+ 
+
+scoped enum 타입인 COLOR 는 COLOR::RED, COLOR::BLUE 와 같이 사용할 수 있습니다.
+scoped enumeration 는 묵시적으로 형 변환이 허용되지 않습니다. 
+// int n = r;                          // error: 묵시적 형 변환 불가
+
+int n = static_cast<int>(r); // OK, n = 21, 명시적 형 변환
+
+
+
+unscoped enumeration 사용 시 발생할 수 있는 잠재적 문제에 대해 알아 보고, scoped enum 사용을 연습해 봅시다.
+
+
+
+enum Genre {    Action,    Comedy,    Drama,    Romance,    SciFi};
+enum Rating {    OneStar,    TwoStars,    ThreeStars,    FourStars,    FiveStars };
+
+Genre movieGenre = Comedy;
+Rating movieRating = OneStar;
+if (movieGenre == OneStar) std::cout << "really?" << std::endl;
+if (movieRating == Comedy) std::cout << "ok?" << std::endl;
+
+먼저 영화의 장르와 평점을 나타내는 unscoped  enum 타입 Genre 와 Rating 을 선언하였습니다.
+다음으로 movieGenre 는 OneStar와 movieRating 은 Comedy 와 각각 비교하였습니다.
+
+출력 결과는 무엇일까요?
+
+
+
+놀랍게도 "really?" "ok?" 모두 출력됩니다. 
+
+Comedy 나 OneStar 같은 enum 값도 scope (::) 없이 사용할 수 있는데 이런 경우까지 ...
+
+개발자가 실수하기 딱 좋죠?
+
+
+
+
+
+문제
+
+영화관은 다양한 장르 (Genre) 의 영화 등급(Rating) 를 기록해야 합니다. std::map 을 사용하여 각 영화의 장르 및 총 평가 횟수와 평균 평점을 표시합니다.
+
+
+
+첫 번째 enum 클래스인 "Genre"는  Action,    Comedy,    Drama,    Romance,    SciFi 와 같은 다양한 영화 장르를 나타냅니다.
+두 번째 enum 클래스인 "Rating"은 OneStar,    TwoStars,    ThreeStars,    FourStars, FiveStars  로 영화의 평점을 나타냅니다 (5점이 가장 높고 1점이 가장 낮은 평점임).
+2개 이상의 std::map을 사용해 보시고, 키는 영화명, 값은  enum 타입이나 점수, 평점 등을 저장해 보세요.
+
+
+
+
+
+입력
+
+The Shawshank Redemption
+2
+5
+The Godfather
+5
+5
+Forrest Gump
+2
+4
+The Dark Knight
+0
+5
+Pulp Fiction
+5
+4
+The Godfather
+5
+5
+Forrest Gump
+2
+4
+The Dark Knight
+0
+4
+Pulp Fiction
+5
+4
+The Dark Knight
+0
+3
+Pulp Fiction
+5
+1
+q
+
+
+
+출력
+
+
+Forrest Gump: 2 ratings, average rating 4 stars, genre: 2
+Pulp Fiction: 3 ratings, average rating 3 stars, genre: 5
+The Dark Knight: 3 ratings, average rating 4 stars, genre: 0
+The Godfather: 2 ratings, average rating 5 stars, genre: 5
+The Shawshank Redemption: 1 ratings, average rating 5 stars, genre: 2
+
+
+제출파일
+
+enum_class.cpp
+210.csv
+

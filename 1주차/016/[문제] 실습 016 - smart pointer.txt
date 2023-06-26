@@ -1,0 +1,123 @@
+실습 016 - smart pointer
+제출 마감일: 2023-04-27 23:59
+업로드 가능한 파일 수: 2
+제출 방식: 개인
+
+
+
+
+목적
+
+이 실습은 smart pointer를 사용하는 것을 연습합니다. 주어진 함수의 파라미터에 C++의 포인터를 사용하여 포인터가 가리키는 곳의 내용을 변경할 수 있습니다. 단, 스마트 포인터가 가리키는 메모리 영역은 자유 영역 (힙 영역)입니다.
+
+
+
+설명
+
+C++ 스마트 포인터는 raw 포인터 함수를 사용했을 때 발생하는 댕글링 포인터, double free, 메모리 누수 등에 저항하기 위해 자주 사용됩니다. 또한, 포인터의 소유권 (ownership) 개념을 도입하여 unique_ptr, shared_ptr 포인터 등으로 세분화하여 포인터 사용의 의도를 명확하게 하도록 하였습니다.
+
+
+
+예를 들어, unique_ptr 은 다음과 같이 사용할 수 있습니다.
+
+
+
+    unique_ptr<int> pi1 = unique_ptr<int> {new int{1}};
+
+    unique_ptr<int> pi2 {new int {2}};
+
+    auto pi3 = unique_ptr<int> {new int {3}};
+
+    auto pi4 = make_unique<int*>(new int {4}); //make_unique() function, C++14 부터 지원함
+
+
+
+    cout << *pi1 << "\t" << *pi2 << "\t" << *pi3 << "\t" << **pi4 << endl;
+
+
+
+스마트 포인터가 가리키는 메모리의 내용에 접근하려면 변수 이름 앞에 * (역참조) 를 추가하십시오. 예를 들어, *pi1 은 변수 pi1 에 저장된 값을 반환하고, *pi1 에 대한 모든 수정은 변수 pi1 에 반영됩니다.
+
+
+#include <iostream>
+#include <memory>
+using namespace std; 
+
+void inc (int* v) {     
+     (*v)++;
+} 
+
+void dec (int& v) {     
+     (*v)--;
+} 
+
+int main() {
+    unique_ptr<int> pa {new int{}};
+    cin >> *pa;
+    inc(pa.get()); cout << *pa << endl;
+    dec(*pa); cout << *pa << endl;
+    return 0;
+}
+
+
+
+문제
+다음과 같이 동작하는 함수를 구현하시오.
+
+- 함수는 두 개의 정수 포인터 a, b 를 파라미터로 가진다.
+- 함수는 전달받은 2 개의 인자로 덧셈과 뺄셈을 수행한다.
+- 함수의 반환값은 void 이다. (반환값이 없음)
+- a = a + b
+- b = a - b
+
+
+
+제출파일
+main.cpp
+16.csv
+
+
+
+입출력
+입력	출력
+3                  
+4	7                      
+-1
+20
+10	30
+10
+1023
+756	1779
+267
+
+
+제공되는 파일:
+
+main.cpp---------------------------
+
+
+
+#include <iostream>
+
+#include <memory>
+
+using namespace std;
+
+
+
+void update(int* a, int* b);
+
+int main(){
+
+    //unique_ptr 를 이용하여 프로그램 기능을 구현하세요!
+}
+
+
+
+void update(int* a, int* b){
+
+    //이 함수를 구현하세요!
+
+}
+
+----------------------------------

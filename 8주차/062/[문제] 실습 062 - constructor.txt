@@ -1,0 +1,147 @@
+실습 062 - constructor
+제출 마감일: 2023-04-27 23:59
+업로드 가능한 파일 수: 3
+제출 방식: 개인
+
+
+목적
+
+이 실습은 다양한 형태로 객체를 생성하도록 class 의 생성자를 정의하는 연습을 합니다. 
+
+
+
+설명
+
+C++에서 객체를 생성하기 위해서는 클래스의 생성자가 필요합니다.
+
+
+다양한 상황에서 객체를 생성할 수 있도록 필요한 생성자를 정의해 봅니다. 
+
+
+문제
+
+주어진 프로그램이 정상 출력되도록 Vehicle 클래스의 생성자를 정의하시오.
+
+<참고>
+
+core guideline 의 C.49 를 준수하시오.
+
+//VehicleTest.cpp
+
+int main() {
+    Vehicle modelY{"Model Y LR", 511, 85};
+    auto model3 = Vehicle {"Model 3 LR",523, 85};
+
+    modelY.displayEfficiency();
+    model3.displayEfficiency();
+
+    Vehicle vehicles[4] = {{"Model Y LR", 511, false, 85},
+                           {"Model 3 LR", 523, true, 85},
+                           {"Model Y LR", 511, false, 85},
+                           {"Model 3 LR", 523, true, 85}};
+
+    for (auto& v : vehicles) {
+        v.autoPilot(false);
+        v.runFDS();
+        v.displayEfficiency();
+    }
+
+    Vehicle tesla[2];
+    for (auto& t : tesla) {
+        t.autoPilot(false);
+        t.runFDS();
+        t.displayEfficiency();
+    }
+
+    return 0;
+}
+
+
+입력
+
+없음
+
+
+출력
+
+Model Y LR Range: 511km, Efficiency: 6.01kWh/100km
+
+Model 3 LR Range: 523km, Efficiency: 6.15kWh/100km
+
+Auto-Pilot is off!
+
+Model Y LR Range: 511km, Efficiency: 6.01kWh/100km
+
+Auto-Pilot is off!
+
+Full Self-Driving!
+
+Model 3 LR Range: 523km, Efficiency: 6.15kWh/100km
+
+Auto-Pilot is off!
+
+Model Y LR Range: 511km, Efficiency: 6.01kWh/100km
+
+Auto-Pilot is off!
+
+Full Self-Driving!
+
+Model 3 LR Range: 523km, Efficiency: 6.15kWh/100km
+
+Auto-Pilot is off!
+
+Model Y LR Range: 511km, Efficiency: 6.01kWh/100km
+
+Auto-Pilot is off!
+
+Model Y LR Range: 511km, Efficiency: 6.01kWh/100km
+
+
+
+
+제출파일
+
+Vehicle.h
+Vehicle.cpp
+62.csv
+
+
+
+참고
+
+// Vehicle.h 
+
+#include <string>
+class Vehicle {
+public:
+    // your code here
+    void autoPilot(bool onOff);
+    void runFDS() const;
+    void displayEfficiency() const;
+private:
+    std::string name;
+    int range;
+    bool hasFDS;
+    float batteryCapacity;
+};
+
+// Vehicle.cpp
+
+#include <iostream>
+#include <iomanip>
+#include "Vehicle.h"
+
+// your code here
+
+void Vehicle::autoPilot(bool onOff){
+    std::cout << "Auto-Pilot is " << (onOff ? "on!" : "off!") << std::endl;
+}
+
+void Vehicle::runFDS() const {
+    if(hasFDS)
+        std::cout << "Full Self-Driving!" << std::endl;
+}
+
+void Vehicle::displayEfficiency() const {
+    std::cout << name << " Range: " << range << "km, Efficiency: " << std::setprecision(3) << range / batteryCapacity << "kWh/100km" << std::endl;
+}

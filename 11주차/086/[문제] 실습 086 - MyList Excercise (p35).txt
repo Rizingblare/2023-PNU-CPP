@@ -1,0 +1,143 @@
+실습 086 - MyList Excercise (p35)
+제출 마감일 2023-05-17 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+
+목적
+
+
+이 실습은 template 함수를 정의하는 연습을 합니다. 
+
+
+
+
+
+문제
+
+Implement a generic list using templates
+
+MyListTest.cpp
+
+#include MyList.h
+
+using namespace stdcomplex_literals;
+
+int main() {
+
+    MyListstdcomplexdouble, 5 complexList;
+
+    stdcomplexdouble z1 = {0. + 0i}, z2 = {1. + 1i}, z3 = {2. + 2i};
+    complexList.add(z1); complexList.add(z2); complexList.add(z3);
+
+    stdvectorstdcomplexdouble cTargets = {{0. + 0i}, {1. + 0i}};
+    for(auto target  cTargets) {
+        auto found = find(complexList.begin(), complexList.end(), target);
+        if (found != complexList.end()) stdcout  Found   found  stdendl;
+    }
+
+    MyListstdstring, 5 stringList;
+    stdstring s1 = abc, s2 = def, s3 = ghi;
+
+    stringList.add(s1); stringList.add(s2); stringList.add(s3);
+
+    stdvectorstdstring sTargets = {ccc, abc};
+    for(auto target  sTargets) {
+        auto found = find(stringList.begin(), stringList.end(), target);
+        if (found != stringList.end()) stdcout  Found   found  stdendl;
+    }
+
+    complexList.remove(z1);
+    for (auto z  complexList) stdcout  z  stdendl;
+
+    stringList.remove(s1);
+    for (auto s  stringList) stdcout  s  stdendl;
+
+    MyListstdstring, 5 stringList2(stringList);   copy constructor
+    stringList2.add(s1);
+    for (auto s  stringList) stdcout  s  stdendl;
+    for (auto s  stringList2) stdcout  s  stdendl;
+
+    MyListstdstring, 5 stringList3;
+    stringList3 = stringList2;               copy assignment
+    stringList3.remove(s2);
+
+    for (auto s  stringList3) stdcout  s  stdendl;
+    for (auto s  stringList2) stdcout  s  stdendl;
+}
+
+ MyList.h
+#include cstddef
+
+templatetypename T, size_t N
+class MyList {
+public
+    MyList();
+    MyList(const MyList& rhs) noexcept;
+    MyList& operator=(const MyList& rhs);
+    ~MyList() noexcept;
+
+    void add(T& data);
+    void remove(T& data);
+
+    const T begin() const {return _data;}
+    const T end() const {return _data + N;}
+
+    T begin() {return _data;}
+    T end() {return _data + N;}
+
+private
+    T _data= nullptr;
+    int pos = 0;
+};
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+Found (0,0)
+Found abc
+(1,1)
+(2,2)
+(0,0)
+(0,0)
+(0,0)
+def
+ghi
+
+
+
+def
+ghi
+
+
+
+def
+ghi
+abc
+
+
+ghi
+abc
+
+
+
+def
+ghi
+abc
+
+
+
+
+
+
+제출파일
+
+86.csv
+MyList.h

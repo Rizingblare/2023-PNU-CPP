@@ -1,0 +1,88 @@
+실습 075 - subscript operator (indexing operator)
+제출 마감일 2023-05-07 2359
+업로드 가능한 파일 수 2
+제출 방식 개인
+
+목적
+
+이 실습은  class 의 subscript operator [ ] 의 연산자 오버로딩을 연습합니다. 
+
+
+
+설명
+
+
+STL 에서 제공하는 stdarray 타입은 배열처럼 다룰 수 있습니다. 
+
+예를 들어, 다음과 같이 사용이 가능합니다.
+
+stdarrayint, 4 arr = {1, 2, 3, 4};
+
+for (int i = 0; i  arr.size(); ++i)
+    stdcout  arr[i] stdendl;
+ 
+C++ 에서는 연산자 중 subscript operator 오버로딩 하여 객체를 배열처럼 사용 가능합니다.
+
+대표적으로 stdarray, stdvector 등의 컨테이너 객체들을 생각해 보시면
+[ ] 연산자의 사용처를 떠올려 볼 수 있습니다.
+
+
+우리만의 Array 객체를 만들어 봅시다.
+
+  
+ 
+
+
+문제
+
+subscript operator 를 지원하는 Array 객체를 생성하는 클래스를 정의하시오.
+단, 주어진 헤더 파일을 이용하시오.
+
+
+참고
+
+Array.h
+#include cstddef
+#include initializer_list
+#include memory
+
+class Array {
+public
+    Array(stdinitializer_listint args, size_t size);
+    int& operator [] (int index);
+    size_t size() const;
+
+private
+    stdunique_ptrint[] data;
+    size_t _size;
+};
+
+
+ArrayTest.cpp
+
+int main(){
+    Array myArr {{1, 2, 3, 4}, 4};
+    for (int i = 0; i  myArr.size(); ++i)
+        stdcout  myArr[i] stdendl;
+}
+
+
+
+입력
+
+없음
+
+
+
+출력
+
+1
+2
+3
+4
+
+
+제출파일
+
+Array.cpp
+75.csv

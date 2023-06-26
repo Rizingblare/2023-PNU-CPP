@@ -1,0 +1,115 @@
+실습 017 - auto
+제출 마감일 2023-04-27 2359
+업로드 가능한 파일 수 3
+제출 방식 개인
+
+
+
+
+목적
+
+
+
+이 실습은 auto 키워드를 사용하는 것을 연습합니다. 
+
+
+
+
+
+설명
+
+
+
+C++ 는 int, float, char 등의 primitive types 이외에도 표준 라이브러리에서 제공하는 다양한 타입들이 존재합니다.
+
+예를 들어, unique_ptr, shared_ptr 과 같은 스마트 포인터, vector, map, array 와 같은 컨테이너들 입니다.
+
+
+
+C++ 에서는 auto 라는 키워드를 제공하여 타입을 정의하는 개발자의 수고를 덜어() 주고 있습니다. 
+
+또한, 파이썬이나 자바 스크립트를 주 언어로 사용하는 개발자들에게도 익숙한() 방법으로 변수를 선언하도록 합니다.
+
+
+
+auto 키워드 사용은 다음과 같습니다. 
+
+
+
+auto my_var = 3;
+
+
+C++ 컴파일러는 컴파일 타임에 숫자 3을 보고 my_var 변수의 타입을 int 로 추론합니다.
+
+개발자가 신경 써야 하는 부분은 컴파일러가 타입을 잘 추론할 수 있도록 정보를 주는 일입니다.
+
+C++ 11 이후로, 3년에 한 번씩 표준을 업데이트 하면서 auto 의 사용 범위가 점차적으로 확대 되었습니다.
+
+예를 들어, 함수의 반환값 타입을 auto 로 대신할 수 있고, 심지어 C++20 에서는 함수의 파라미터 타입도 auto 를 허용하고 있습니다.
+
+auto 키워드와 친해지는 시간을 가져 봅시다.
+
+
+문제
+
+주어진 코드에서 변수, 함수 파라미터, 함수 리턴값의 적절한 타입을 선택하여 실행하시오. 
+
+참고
+표준 헤더 파일 (예, iostream) 에는 다른 헤더 파일 (예, string) 이 포함될 수 있습니다. 다만, 컴파일러 별로 표준 헤더 파일에 포함된 헤더 파일이 다를 수 있습니다. (즉, 윈도우즈, 리눅스, 맥에 따라서 다를 수 있음)
+수업에서는 어떤 환경에서도 정상적으로 컴파일 될 수 있도록 (portability) 명시적으로 헤더 파일을 포함하도록 요구합니다. (예, iostream, string, tuple, memory 등)
+C++11 표준으로 컴파일 하면, trailing return type 에러를 볼 수 있고,
+C++14 표준으로 컴파일 하면, template arguments 관련 에러를 볼 수 있고,
+C++17 표준으로 컴파일 하면 정상 컴파일 됩니다. 
+CTAD 참고 (since C++17)  - stdvector v1{1, 2};   이런 것이 가능함
+
+
+
+입력
+
+없음
+
+
+출력
+
+1, 2
+
+a 2, b 1
+
+sum 3
+
+
+
+
+
+제출파일
+
+
+아래 파일들을 zip 파일로 압축해서 제출하시오.
+main.cpp
+17.csv
+
+
+
+
+main.cpp ---------------------------
+
+
+
+[TYPE] sum(int a, int b){
+    return stdtuple{sum , a + b};
+}
+
+int main() {
+    [TYPE] pa = stdmake_uniqueint(1);
+    [TYPE] pb = stdmake_uniqueint(2);
+
+    stdcout  pa  ,   pb  stdendl;
+    [TYPE] my_swap = [ ] (auto a, auto b) { auto temp = a; a = b; b=temp;};
+    my_swap(pa.get(), pb.get());
+    stdcout  a   pa  , b   pb  stdendl;
+
+    [TYPE] [label, result] = sum(pa, pb);
+    stdcout  label  result  stdendl;
+
+    return 0;
+}
